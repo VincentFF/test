@@ -2,18 +2,20 @@ import { registerAs } from '@nestjs/config';
 
 // 默认配置值（配置文件中的值）
 const defaultConfig = {
-  host: 'localhost',
+  host: '10.0.0.17',
   port: 5432,
-  username: 'postgres',
-  password: 'password',
-  database: 'test_db',
+  username: 'test',
+  password: 'Test@12345',
+  database: 'helloworld',
 };
 
 export default registerAs('database', () => {
   // 环境变量优先，没有则使用默认配置
   const config = {
     host: process.env.DB_HOST || defaultConfig.host,
-    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : defaultConfig.port,
+    port: process.env.DB_PORT
+      ? parseInt(process.env.DB_PORT, 10)
+      : defaultConfig.port,
     username: process.env.DB_USERNAME || defaultConfig.username,
     password: process.env.DB_PASSWORD || defaultConfig.password,
     database: process.env.DB_DATABASE || defaultConfig.database,
